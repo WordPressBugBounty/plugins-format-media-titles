@@ -1,112 +1,107 @@
 === Format Media Titles ===
 Contributors: dgwyer, wpgoplugins
-Tags: format, image, title, alt, tag, media
-Requires at least: 5.0
-Tested up to: 5.4.2
-Stable tag: 1.0.0
+Tags: media, title, alt text, images, metadata
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 1.1.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically formats the title (and optionally the ALT field) for new media uploads. No need to manually edit the title anymore every time you upload an image!
+Automatically clean up titles for new media uploads and copy the result to selected attachment fields.
 
 == Description ==
 
-Format Media Titles WordPress plugin allows you to format titles for newly uploaded media items. It can be pretty tedious to have to manually edit the title for newly uploaded media items. This Plugin automates things by removing and replacing characters from the title such as hyphens, and underscores, with spaces. The title can then be capitalized by a method of your choice:
+Format Media Titles applies predictable formatting rules whenever a new attachment is added to the WordPress media library.
 
-* First letter of each word capitalized.
-* First letter of first word capitalized only.
-* All letters made uppercase.
-* All letter made lower case.
-* No capitalization. Title remains unchanged.
+Use it to:
 
-You will especially benefit from this Plugin if your media files have descriptive names, as you won't have to manually edit them at all after uploading them!
+* Replace hyphens, underscores, periods, tildes, or plus signs with spaces.
+* Capitalize every word, the first word, use upper/lowercase, or leave case unchanged.
+* Keep selected words such as `SEO`, `PDF`, or `UK` uppercase.
+* Copy the formatted title to alternative text, caption, and description fields.
+* Preserve existing settings when updating from earlier releases.
 
-As well as formatting the title for newly uploaded media items, you can also optionally copy the formatted title to the ALT, and description fields too, via plugin settings.
+The plugin changes WordPress attachment metadata only. It does not rename or modify the uploaded file.
 
-Please <a href="https://wordpress.org/support/view/plugin-reviews/format-media-titles"><strong>rate</strong></a> this Plugin if you find it useful. It only takes a moment but it's very much appreciated. :)
+= Free and Pro =
 
-><strong>The Pro version of Format Media Titles is <a href="https://wpgoplugins.com/plugins/seo-media-manager/">now available</a>!</strong> Upgrade today for even more flexible plugin options.
->
->Plus, the Pro version includes a <a href="https://wpgoplugins.com/plugins/seo-media-manager/#smm-gif">batch processor</a> to actively scan and (re)format all existing media as you want! Checkout the <a href="hhttps://wordpress.org/plugins/format-media-titles/screenshots/">screenshots</a>, or click <a href="https://wpgoplugins.com/plugins/seo-media-manager/">here</a> for more details.
->
->See our <a href="https://www.wpgoplugins.com" target="_blank">WordPress plugin site</a> for more top plugins!
+Format Media Titles handles new uploads. [SEO Media Manager](https://wpgoplugins.com/plugins/seo-media-manager/) adds more cleanup rules, original-filename sources, safe batch processing for existing media, automatic updates, and priority support.
+
+SEO Media Manager imports Format Media Titles settings on first activation, including the uppercase-word list introduced in version 1.1.0.
 
 == Installation ==
 
-The Plugin can be installed directly from the main WordPress Plugin page.
+1. Install Format Media Titles from Plugins > Add New in WordPress.
+2. Activate the plugin.
+3. Open Settings > Format Media Titles.
+4. Choose the formatting rules and optional metadata fields.
+5. Upload a new media item to apply the saved rules.
 
-1. Go to the 'Plugins => Add New' page.
-2. Enter 'Format Media Titles' (without quotes) in the textbox and click the 'Search Plugins' button.
-3. In the list of relevant Plugins click the 'Install' link for 'Format Media Titles' on the right hand side of the page.
-4. Click the 'Install Now' button on the pop-up page.
-5. Click 'Activate Plugin' to finish installation.
-6. Configure Plugin options from the admin Settings page.
-7. That's it!
+== Frequently Asked Questions ==
+
+= Does this rename the original file? =
+
+No. It updates WordPress attachment metadata and leaves the uploaded file unchanged.
+
+= Can it process media already in my library? =
+
+The free plugin processes new uploads. SEO Media Manager adds safe batch processing for selected items or the complete existing library.
+
+= How do uppercase words work? =
+
+Enter comma-separated words such as `SEO, PDF, UK`. After the normal capitalization rule runs, matching whole words are restored to uppercase. Partial matches inside longer words are not changed.
+
+= What happens to my settings when I update? =
+
+Existing settings are retained. The new uppercase-word list starts empty until you add words.
 
 == Screenshots ==
 
-1. Default WordPress media upload. As you can see, the title needs manual editing.
-2. Same media upload with 'Format Media Titles' Plugin activated. No need to manually edit title anymore!
-3. More flexible options now available. (Pro only)
-4. Exclusive batch processor to (re)format existing media items. (Pro only)
-5. Support and license tab for links to documentation, and support. Enter plugin license key to receive automatic plugin updates. (Pro only)
+1. A default WordPress media upload before title formatting.
+2. The same workflow with Format Media Titles applying saved rules.
+3. Additional formatting controls available in SEO Media Manager.
+4. SEO Media Manager batch processing for existing attachments.
+5. SEO Media Manager account, documentation, and support links.
+
+== Upgrade Notice ==
+
+= 1.1.0 =
+
+Adds protected uppercase words, modernizes the settings and update logic, and supports current WordPress and PHP releases while retaining existing settings.
 
 == Changelog ==
 
-= 1.0.0, JULY 14, 2020 =
+= 1.1.0 - 2026-08-11 =
 
-Updated to work with WordPress 5.4.2.
+* Added a rule for keeping selected whole words such as SEO or PDF uppercase.
+* Modernized the settings screen and sanitized every saved field.
+* Added Unicode-aware capitalization with safe fallbacks.
+* Prevented empty titles and partial metadata updates when an attachment update fails.
+* Preserved the existing SEO Media Manager handover and settings schema.
+* Added automated unit, compatibility, packaging, and WordPress smoke tests.
+* Updated documentation and compatibility metadata for current WordPress releases.
 
-*0.51*
+= 1.0.0 - 2020-07-14 =
 
-* Fully compatible with WordPress 4.9.8.
-* Minor updates to plugin settings page.
+* Updated compatibility for WordPress 5.4.2.
 
-*0.50*
+= 0.54 =
 
-* Plugin settings page updated.
+* Updated the settings screen.
 
-*0.42*
+= 0.30 =
 
-* Broken image links fixed on plugin settings page.
+* Fixed unexpected character removal during formatting.
 
-*0.41*
+= 0.26 =
 
-* Plugin settings page updated.
+* Added optional caption and description output.
 
-*0.30*
+= 0.25 =
 
-* Fixed bug in formatting process (unexpected removal of character).
+* Added optional alternative-text output and translation support.
 
-*0.29*
+= 0.1 =
 
-* Updated plugin settings links.
-
-*0.28*
-
-* Fixed broken links and updated plugin icon.
-
-*0.27*
-
-* Updated plugin with 'Pro' links.
-
-*0.26*
-
-* Added option to automatically add formatted title to the media caption field.
-* Added option to automatically add formatted title to the media description field.
-
-*0.25*
-
-* Added option to automatically add formatted title to the media ALT field.
-* Now fully translatable!
-* Minor tweaks to the plugin options page.
-
-*0.21*
-
-* Fixed error when saving plugins settings. This fix may require you to check plugin settings and re-save.
-
-*0.2*
-
-* Updated plugin settings page.
-* Removed redundant code.
-* Tested with WordPress 4.0.
-
-*0.1 Initial Release*
+* Initial release.
