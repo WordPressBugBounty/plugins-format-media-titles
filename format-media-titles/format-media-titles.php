@@ -1,84 +1,51 @@
 <?php
 /**
- * Plugin Name: Format Media Titles
- * Plugin URI: https://wpgoplugins.com/plugins/seo-media-manager/
- * Description: Formats titles for new media uploads and can copy the result to common attachment fields.
- * Version: 1.1.0
- * Requires at least: 6.0
- * Requires PHP: 7.4
- * Author: David Gwyer
- * Author URI: https://wpgoplugins.com/
- * License: GPL-2.0-or-later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: format-media-titles
- * Domain Path: /languages
+ * Compatibility loader for existing WordPress.org installations.
  *
- * @package Format_Media_Titles
+ * Version 1.2.0 and earlier were activated through
+ * format-media-titles/format-media-titles.php. The shared Free/Pro codebase
+ * uses seo-media-manager.php as its canonical main file, so this loader keeps
+ * an in-place WordPress.org update active and migrates the stored basename.
+ *
+ * This file intentionally has no plugin header.
+ *
+ * @package WPGO_SEO_Media_Manager
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FMT_VERSION', '1.1.0' );
-define( 'FMT_FILE', __FILE__ );
-define( 'FMT_OPTION_NAME', 'fmt_options' );
+$wpgo_smm_legacy_basename    = plugin_basename( __FILE__ );
+$wpgo_smm_canonical_basename = plugin_basename( __DIR__ . '/seo-media-manager.php' );
 
-require_once __DIR__ . '/includes/class-fmt-formatter.php';
-require_once __DIR__ . '/includes/class-fmt-plugin.php';
+if ( $wpgo_smm_legacy_basename !== $wpgo_smm_canonical_basename ) {
+	$wpgo_smm_active_plugins = get_option( 'active_plugins', array() );
+	$wpgo_smm_legacy_index   = is_array( $wpgo_smm_active_plugins )
+		? array_search( $wpgo_smm_legacy_basename, $wpgo_smm_active_plugins, true )
+		: false;
 
-/**
- * Get the shared plugin runtime.
- *
- * @return FMT_Plugin
- */
-function fmt_plugin() {
-	static $plugin = null;
-
-	if ( null === $plugin ) {
-		$plugin = new FMT_Plugin();
+	if ( false !== $wpgo_smm_legacy_index ) {
+		$wpgo_smm_active_plugins[ $wpgo_smm_legacy_index ] = $wpgo_smm_canonical_basename;
+		update_option( 'active_plugins', array_values( array_unique( $wpgo_smm_active_plugins ) ) );
 	}
 
-	return $plugin;
-}
-
-/**
- * Add defaults without overwriting established settings.
- *
- * The legacy reset-on-reactivation option remains supported for compatibility.
- *
- * @return void
- */
-function fmt_add_defaults() {
-	$current = get_option( FMT_OPTION_NAME );
-	$reset   = is_array( $current ) && ! empty( $current['chk_default_options_db'] );
-
-	if ( ! is_array( $current ) || $reset ) {
-		update_option( FMT_OPTION_NAME, FMT_Plugin::default_options() );
+	if ( is_multisite() ) {
+		$wpgo_smm_network_plugins = get_site_option( 'active_sitewide_plugins', array() );
+		if ( is_array( $wpgo_smm_network_plugins ) && isset( $wpgo_smm_network_plugins[ $wpgo_smm_legacy_basename ] ) ) {
+			$wpgo_smm_network_plugins[ $wpgo_smm_canonical_basename ] = $wpgo_smm_network_plugins[ $wpgo_smm_legacy_basename ];
+			unset( $wpgo_smm_network_plugins[ $wpgo_smm_legacy_basename ] );
+			update_site_option( 'active_sitewide_plugins', $wpgo_smm_network_plugins );
+		}
 	}
 }
 
-/**
- * Remove plugin settings only when WordPress uninstalls the plugin.
- *
- * @return void
- */
-function fmt_delete_plugin_options() {
-	delete_option( FMT_OPTION_NAME );
-}
+unset(
+	$wpgo_smm_active_plugins,
+	$wpgo_smm_canonical_basename,
+	$wpgo_smm_legacy_basename,
+	$wpgo_smm_legacy_index,
+	$wpgo_smm_network_plugins
+);
 
-/**
- * Preserve the historical public callback used by SEO Media Manager handover.
- *
- * @param int $id Attachment ID.
- * @return void
- */
-function fmt_update_media_title( $id ) {
-	fmt_plugin()->update_media_title( $id );
-}
-
-register_activation_hook( __FILE__, 'fmt_add_defaults' );
-register_uninstall_hook( __FILE__, 'fmt_delete_plugin_options' );
-add_action( 'add_attachment', 'fmt_update_media_title' );
-
-fmt_plugin()->register_hooks();
+require_once __DIR__ . '/seo-media-manager.php';

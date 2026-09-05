@@ -1,107 +1,147 @@
-=== Format Media Titles ===
+=== SEO Media Manager ===
 Contributors: dgwyer, wpgoplugins
-Tags: media, title, alt text, images, metadata
-Requires at least: 6.0
-Tested up to: 7.0
+Tags: media, images, alt text, seo, metadata
+Requires at least: 6.8
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically clean up titles for new media uploads and copy the result to selected attachment fields.
+Automatically format media titles and optionally copy the result to alternative text, captions, and descriptions.
 
 == Description ==
 
-Format Media Titles applies predictable formatting rules whenever a new attachment is added to the WordPress media library.
+SEO Media Manager gives site owners consistent, configurable media metadata without manually editing every attachment.
 
-Use it to:
+The Free edition includes:
 
-* Replace hyphens, underscores, periods, tildes, or plus signs with spaces.
-* Capitalize every word, the first word, use upper/lowercase, or leave case unchanged.
-* Keep selected words such as `SEO`, `PDF`, or `UK` uppercase.
-* Copy the formatted title to alternative text, caption, and description fields.
-* Preserve existing settings when updating from earlier releases.
+* Format metadata automatically when media is uploaded.
+* Replace hyphens, underscores, periods, tildes, and plus signs with spaces.
+* Control letter case and capitalisation.
+* Keep selected whole words such as `SEO`, `PDF`, or `UK` uppercase.
+* Preview the title and copied metadata while changing rules, before saving.
+* Copy the formatted title to alternative text, captions, and descriptions.
+* Filter the default settings, formatted title, and alternative text in custom code.
 
-The plugin changes WordPress attachment metadata only. It does not rename or modify the uploaded file.
+SEO Media Manager Pro adds:
 
-= Free and Pro =
-
-Format Media Titles handles new uploads. [SEO Media Manager](https://wpgoplugins.com/plugins/seo-media-manager/) adds more cleanup rules, original-filename sources, safe batch processing for existing media, automatic updates, and priority support.
-
-SEO Media Manager imports Format Media Titles settings on first activation, including the uppercase-word list introduced in version 1.1.0.
+* Batch-process the complete Media Library in durable 20-item background jobs.
+* Limit a batch job to images, SVG, PDF, documents, audio, or video.
+* Select a custom set of attachments to process.
+* Leave the settings screen while a job continues, then return to its saved progress.
+* Cancel an active job safely after its current group finishes.
+* Use original filenames or a fixed title as the source.
+* Replace more punctuation, numbers, and custom phrases.
+* Split titles at capital letters or number groups.
+* Receive paid updates and priority support through Freemius.
 
 == Installation ==
 
-1. Install Format Media Titles from Plugins > Add New in WordPress.
-2. Activate the plugin.
-3. Open Settings > Format Media Titles.
-4. Choose the formatting rules and optional metadata fields.
-5. Upload a new media item to apply the saved rules.
+1. Install SEO Media Manager from the WordPress plugin directory, or upload a Pro ZIP from your WPGO Plugins account.
+2. Activate SEO Media Manager.
+3. Open SEO Media Manager > Settings and review the formatting rules.
+4. Pro users can activate a licence from the Account screen to enable the paid features, updates, and support.
+
+Back up the site database before batch-changing existing media metadata.
 
 == Frequently Asked Questions ==
 
-= Does this rename the original file? =
+= Does batch processing change the original media files? =
 
-No. It updates WordPress attachment metadata and leaves the uploaded file unchanged.
+No. It updates WordPress attachment metadata only. The stored file is not renamed or modified.
 
-= Can it process media already in my library? =
+= Can I process only selected attachments? =
 
-The free plugin processes new uploads. SEO Media Manager adds safe batch processing for selected items or the complete existing library.
+Yes, with Pro. Open the Batch processing tab, choose Custom selection, select the attachments, and start the background job.
 
-= How do uppercase words work? =
+= Can I process only one kind of media? =
 
-Enter comma-separated words such as `SEO, PDF, UK`. After the normal capitalization rule runs, matching whole words are restored to uppercase. Partial matches inside longer words are not changed.
+Yes. The Pro batch screen can limit either the complete library or a custom selection to images, SVG, PDF, documents, audio, or video. The chosen filter is saved with the job.
 
-= What happens to my settings when I update? =
+= Do I need to keep the settings screen open? =
 
-Existing settings are retained. The new uppercase-word list starts empty until you add words.
+No. Action Scheduler processes the library in small background groups and saves progress between requests. You can leave the screen and return later. As with other WordPress scheduled tasks, a site with WP-Cron disabled needs a working server-side cron runner.
+
+= What happens when I deactivate a Pro licence? =
+
+The plugin stays active and shows the Free interface. Your paid settings remain stored, but paid rules and batch processing are unavailable until a valid licence is activated again.
+
+= Will existing Format Media Titles settings be kept? =
+
+Yes. Version 1.3.0 imports the established `fmt_options` settings and keeps a compatibility copy for a safe rollback. The WordPress.org slug remains `format-media-titles`, so existing sites continue to receive updates from the same listing.
+
+= Are developer filters available? =
+
+Yes. The established seo_media_manager_defaults, seo_media_manager_title, and seo_media_manager_alt filters are preserved.
 
 == Screenshots ==
 
-1. A default WordPress media upload before title formatting.
-2. The same workflow with Format Media Titles applying saved rules.
-3. Additional formatting controls available in SEO Media Manager.
-4. SEO Media Manager batch processing for existing attachments.
-5. SEO Media Manager account, documentation, and support links.
-
-== Upgrade Notice ==
-
-= 1.1.0 =
-
-Adds protected uppercase words, modernizes the settings and update logic, and supports current WordPress and PHP releases while retaining existing settings.
+1. Free formatting settings with the complete four-step workflow and editable live preview.
+2. A newly uploaded Media Library item before its generated title and metadata are cleaned up.
+3. The same Media Library item after Free formatting has populated the chosen fields.
+4. Pro version: the product Home with quick-start guidance, Pro tools, support, and other WPGO plugins.
+5. Pro version: the full formatting workspace with original-filename rules and the live transformation preview.
+6. Pro version: source, phrase-removal, parsing, and extended cleanup controls shown in detail.
+7. Pro version: background-processing scope and the file-type filter for a selected media set.
+8. Pro version: a running background job with saved progress, recent results, and safe cancellation.
+9. Pro version: a completed background job with final totals and its retained recent results.
 
 == Changelog ==
 
-= 1.1.0 - 2026-08-11 =
+= 1.3.0 =
+* Merge the former Free and Pro codebases into one SEO Media Manager source and Freemius product while keeping the `format-media-titles` WordPress.org slug and the `seo-media-manager` Pro folder.
+* Add a compatibility loader that keeps existing Free installations active during the main-file transition and preserves their saved settings.
+* Make an unlicensed Pro package fall back to the Free interface; activating or deactivating the licence now switches the available feature set without replacing the plugin.
+* Keep Pro settings stored while the licence is inactive so they return after reactivation.
+* Add the redesigned four-step settings screen and editable live preview to Free.
+* Add durable server-side background processing for large existing Media Libraries, powered by Action Scheduler.
+* Save progress between 20-item groups so work can continue after the settings screen is closed or refreshed.
+* Add a Pro file-type filter for images, SVG, PDF, documents, audio, and video.
+* Add safe cancellation, duplicate-worker protection, and a clear saved progress summary.
+* Keep each job consistent by using the selected settings and library boundary captured when it starts.
+* Add a top-level Home, Settings, and New Features experience with clearer first-run guidance and a privacy-safe support summary.
+* Add an outcome-led Free-to-Pro comparison on Home with a real background-processing preview and transparent annual pricing, while keeping the Pro Home focused on its available tools.
+* Add the shared More from WPGO Plugins companion section to the bottom of Home.
+* Redesign the formatting-rules screen and add a live filename preview that follows the current unsaved settings.
+* Show a short Settings saved confirmation without keeping a timestamp or repeating it after refresh.
+* Keep notices raised by this or another plugin out of the header across every SEO Media Manager-owned admin screen.
+* Show the discounted first-year price and regular annual renewal price together on the in-plugin upgrade screen, and apply the matching licence-tier coupon at checkout.
+* Show the SEO Media Manager product mark in the in-plugin pricing header.
+* Clarify when a new upload uses its WordPress attachment title or original filename, and confirm compatibility with WordPress 7.1.
 
-* Added a rule for keeping selected whole words such as SEO or PDF uppercase.
-* Modernized the settings screen and sanitized every saved field.
-* Added Unicode-aware capitalization with safe fallbacks.
-* Prevented empty titles and partial metadata updates when an attachment update fails.
-* Preserved the existing SEO Media Manager handover and settings schema.
-* Added automated unit, compatibility, packaging, and WordPress smoke tests.
-* Updated documentation and compatibility metadata for current WordPress releases.
+= 1.2.0 =
+* Add a protected uppercase-word rule for abbreviations such as SEO, PDF, and UK.
+* Import the uppercase-word list from Format Media Titles 1.1.0 during a free-to-Pro migration.
+* Apply the new rule to automatic uploads and safe existing-library batches.
 
-= 1.0.0 - 2020-07-14 =
+= 1.1.2 =
+* Keep the installed premium functionality running after a subscription expires while updates and support remain licence-controlled.
+* Reject malformed batch scopes and attachment IDs before any media is changed.
+* Prevent formatting rules from overwriting attachment metadata with an empty title.
+* Avoid a partial alternative-text update when the attachment post update fails.
+* Improve handling of the plugin folder and main file during Freemius updates.
 
-* Updated compatibility for WordPress 5.4.2.
+= 1.1.1 =
+* Import existing Format Media Titles settings without deleting the free plugin configuration.
+* Prevent both Free and Pro upload callbacks from formatting the same attachment.
 
-= 0.54 =
+= 1.1.0 =
+* Process existing media in sequential, bounded server-side batches instead of loading the complete library and firing concurrent requests.
+* Require administrator capability and a valid nonce for batch mutation requests.
+* Return structured JSON results with error handling and accessible progress feedback.
+* Add Unicode-aware title parsing, casing, capitalization, and whitespace normalization.
+* Prevent duplicate image and gallery title attributes.
+* Modernize the settings screen and update WPGO Plugins account and support links.
+* Raise the supported PHP baseline to 7.4 for current WordPress compatibility.
 
-* Updated the settings screen.
+= 1.0.6 =
+* Correct the Pro plugin folder name for Freemius installation and updates.
 
-= 0.30 =
+= 1.0.4 =
+* Gate the premium-only runtime with Freemius licensing so the deployment processor can generate distinct free and paid artifacts.
 
-* Fixed unexpected character removal during formatting.
-
-= 0.26 =
-
-* Added optional caption and description output.
-
-= 0.25 =
-
-* Added optional alternative-text output and translation support.
-
-= 0.1 =
-
-* Initial release.
+= 1.0.0 =
+* Migrate licensing and updates from the legacy EDD integration to Freemius.
+* Preserve the established settings and formatting behavior.
+* Harden batch processing, reset actions, input validation, and output escaping.

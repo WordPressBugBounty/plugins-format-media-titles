@@ -1,0 +1,35 @@
+{
+	"name": "wpgo-plugins/seo-media-manager",
+	"description": "Development and quality tooling for the SEO Media Manager WordPress plugin.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=7.4",
+		"freemius/wordpress-sdk": "^2.13.4"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
+		"phpstan/phpstan": "2.2.5",
+		"phpunit/phpunit": "^10.5.64",
+		"szepeviktor/phpstan-wordpress": "^2.0.3",
+		"wp-coding-standards/wpcs": "^3.4.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"sort-packages": true
+	},
+	"scripts": {
+		"analyse": "phpstan analyse --no-progress --memory-limit=1G",
+		"check": [
+			"@lint",
+			"@analyse",
+			"@test"
+		],
+		"format": "phpcbf",
+		"lint": "phpcs",
+		"test": "phpunit"
+	}
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">SEO Media Manager icon</title>
+  <desc id="desc">A photograph and metadata lines on a document with an editing pencil.</desc>
+  <rect width="256" height="256" fill="#fbfaf6"/>
+  <path d="M58 204V61c0-10 8-18 18-18h102c10 0 18 8 18 18v104" fill="none" stroke="#1f4635" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90" cy="74" r="13" fill="#d84908"/>
+  <path d="M59 150 113 87l39 38 13-13 31 28v25c-30 18-56 1-83-6-19-5-36-5-54 2z" fill="#567b63"/>
+  <path d="M76 174h79M76 190h79M76 206h49M59 211h136" fill="none" stroke="#1f4635" stroke-width="7" stroke-linecap="round"/>
+  <path d="m171 176 25-25c4-4 9-4 13 0l7 7c4 4 4 9 0 13l-25 25z" fill="#d84908"/>
+  <path d="m171 176 20 20-29 11z" fill="#fbfaf6" stroke="#d84908" stroke-width="5" stroke-linejoin="round"/>
+</svg>
